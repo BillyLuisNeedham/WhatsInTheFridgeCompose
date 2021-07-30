@@ -1,12 +1,10 @@
 package com.billyluisneedham.whatsinthefridge.ui.foodlist
 
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.test.platform.app.InstrumentationRegistry
-import com.billyluisneedham.whatsinthefridge.R
+import androidx.compose.ui.test.onNodeWithText
 import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
