@@ -5,5 +5,5 @@ data class FoodType(
     val name: String,
     val instances: Long,
     val averageShelfLife: Long,
-    val tags: List<TagType>
+    val tags: List<TagType>? = null
 )

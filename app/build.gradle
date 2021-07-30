@@ -48,6 +48,19 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/main/java', 'src/sharedTest/java'
+            }
+        }
+        androidTest {
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTest/java"
+        }
+    }
 }
 
 dependencies {
@@ -81,5 +94,11 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.37"
     //Hilt - JetPack
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha03'
+
+    // Testing JetPack Compose
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
+// Needed for createComposeRule, but not createAndroidComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
 
 }
