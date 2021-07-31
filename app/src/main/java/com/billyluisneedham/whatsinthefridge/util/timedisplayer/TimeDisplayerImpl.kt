@@ -1,7 +1,13 @@
 package com.billyluisneedham.whatsinthefridge.util.timedisplayer
 
-object TimeDisplayerImpl: TimeDisplayer {
-    override fun getTimeDifferenceMessage(firstTime: Long, secondTime: Long): String {
+import android.content.Context
+
+object TimeDisplayerImpl : TimeDisplayer {
+    override fun getTimeDifferenceMessage(
+        context: Context,
+        firstTime: Long,
+        secondTime: Long
+    ): String {
         //TODO WRITE
         return ""
     }
