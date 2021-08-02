@@ -4,5 +4,5 @@ import android.content.Context
 
 interface TimeDisplayer {
 
-    fun getTimeDifferenceMessage(context: Context, firstTime: Long, secondTime: Long): String
+    fun getTimeDifferenceMessage(context: Context, firstTimeInMilliSeconds: Long, secondTimeInMilliSeconds: Long): String
 }
