@@ -105,23 +105,27 @@ class TimeDisplayerImplTest {
         every {
             mockContext.getString(R.string.minute_ago)
         } returns minuteString
+        val secondsRange = (61..119).toList()
+        val secondsRangeInMilliSeconds = secondsRange.map { it * 1000L }
 
-        val sixtySecondsInMilliSeconds = 1000L * 60
-        val sixtySecondsFromNowInMilliSeconds = sixtySecondsInMilliSeconds + now!!
+        //TODO refactor out into own function to make DRY
+        val result = secondsRangeInMilliSeconds.map {
+            TimeDisplayerImpl.getTimeDifferenceMessage(
+                context = mockContext,
+                firstTimeInMilliSeconds = now!!,
+                secondTimeInMilliSeconds = it + now!!
+            )
+        }
 
 
-        val result = TimeDisplayerImpl.getTimeDifferenceMessage(
-            context = mockContext,
-            firstTimeInMilliSeconds = now!!,
-            secondTimeInMilliSeconds = sixtySecondsFromNowInMilliSeconds
-        )
+        result.forEach {
+            assertThat(it, `is`(minuteString))
+        }
 
-
-        assertThat(result, `is`(minuteString))
     }
 
     @Test
-    fun ifTimeIsLessThanOneHourButMoreThanOneHundredAndNinteenSecondsReturnsAmountOfMinutesWithMinutesAgoString() {
+    fun ifTimeIsLessThanOneHourButMoreThanOneHundredAndNineteenSecondsReturnsAmountOfMinutesWithMinutesAgoString() {
         val minutesString = "minutes ago"
         every {
             mockContext.getString(R.string.minutes_ago)
@@ -142,6 +146,33 @@ class TimeDisplayerImplTest {
 
         result.forEachIndexed { index, string ->
             assertThat(string, `is`("${twoToFiftyNine[index]} $minutesString"))
+        }
+    }
+
+    @Test
+    fun ifTimeIsMoreThanFiftyNineMinutesButLessThanOneHundredAndTwentyMinutesReturnsOneHourAgoString() {
+        //TODO MAKE PASS
+
+        val oneHourAgoString = "1 hour ago"
+        every {
+            mockContext.getString(R.string.one_hour_ago)
+        } returns oneHourAgoString
+        val sixtyToOneHundredAndNineteen = (60..119).toList()
+        val timeRangeConvertedFromMinutesToMilliSeconds =
+            sixtyToOneHundredAndNineteen.map { it * 60 * 1000L }
+
+
+        val result = timeRangeConvertedFromMinutesToMilliSeconds.map {
+            TimeDisplayerImpl.getTimeDifferenceMessage(
+                context = mockContext,
+                firstTimeInMilliSeconds = it + now!!,
+                secondTimeInMilliSeconds = now!!
+            )
+        }
+
+
+        result.forEachIndexed { index, string ->
+            assertThat(string, `is`(oneHourAgoString))
         }
     }
 
