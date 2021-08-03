@@ -22,16 +22,32 @@ object TimeDisplayerImpl : TimeDisplayer {
                 "weeks: ${timeDifferenceInMilliSeconds.millisecondsToWeeks()}"
 
         return when {
-            timeDifferenceInMilliSeconds.millisecondsToSeconds() < 10 -> context.getString(R.string.now)
-            timeDifferenceInMilliSeconds.millisecondsToSeconds() < 60 -> {
+            timeDifferenceInMilliSeconds < 10L.secondsToMilliseconds() -> context.getString(R.string.now)
+
+            timeDifferenceInMilliSeconds < 60L.secondsToMilliseconds() -> {
                 "${timeDifferenceInMilliSeconds.millisecondsToSeconds()} ${context.getString(R.string.seconds_ago)}"
 
             }
-            timeDifferenceInMilliSeconds.millisecondsToSeconds() < 120 -> context.getString(R.string.minute_ago)
+            timeDifferenceInMilliSeconds < 120L.secondsToMilliseconds() -> context.getString(R.string.minute_ago)
 
-            timeDifferenceInMilliSeconds.millisecondsToMinutes() < 120 -> {
+            timeDifferenceInMilliSeconds < 60L.minutesToMilliseconds() -> {
                 "${timeDifferenceInMilliSeconds.millisecondsToMinutes()} ${context.getString(R.string.minutes_ago)}"
             }
+
+            timeDifferenceInMilliSeconds < 120L.minutesToMilliseconds() -> context.getString(R.string.one_hour_ago)
+
+            timeDifferenceInMilliSeconds < 24L.hoursToMilliseconds() -> {
+                "${timeDifferenceInMilliSeconds.millisecondsToHours()} ${context.getString(R.string.hours_ago)}"
+            }
+
+            timeDifferenceInMilliSeconds < 48L.hoursToMilliseconds() -> {
+                context.getString(R.string.one_day)
+            }
+
+            timeDifferenceInMilliSeconds < 7L.daysToMilliseconds() -> {
+                "${timeDifferenceInMilliSeconds.millisecondsToDays()} ${context.getString(R.string.days)}"
+            }
+
             else -> string
         }
     }

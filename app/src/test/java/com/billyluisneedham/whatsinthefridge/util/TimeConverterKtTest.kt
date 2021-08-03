@@ -12,8 +12,6 @@ class TimeConverterKtTest {
     private val oneDayInMilliSeconds= 1000L * 60L * 60 * 24L
     private val oneWeekInMilliSeconds = 1000 * 60L * 60 * 24 * 7
 
-
-
     @Test
     fun millisecondsToSeconds_convertedCorrectly_correctValueReturned() {
         val result = oneSecondInMilliseconds.millisecondsToSeconds()

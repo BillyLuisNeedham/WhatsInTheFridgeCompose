@@ -2,6 +2,7 @@ package com.billyluisneedham.whatsinthefridge.util.timedisplayer
 
 import android.content.Context
 import com.billyluisneedham.whatsinthefridge.R
+import com.billyluisneedham.whatsinthefridge.util.daysToMilliseconds
 import io.mockk.every
 import io.mockk.mockk
 import org.hamcrest.CoreMatchers.`is`
@@ -23,6 +24,14 @@ class TimeDisplayerImplTest {
     @After
     fun cleanUp() {
         now = null
+    }
+
+    private fun getTimeDifferenceFromNowStringWith(timeInMilliSeconds: Long): String {
+        return TimeDisplayerImpl.getTimeDifferenceMessage(
+            context = mockContext,
+            firstTimeInMilliSeconds = now!!,
+            secondTimeInMilliSeconds = timeInMilliSeconds + now!!
+        )
     }
 
     @Test
@@ -62,11 +71,7 @@ class TimeDisplayerImplTest {
 
 
         val results: List<String> = zeroToTenSecondsInMilliSeconds.map {
-            TimeDisplayerImpl.getTimeDifferenceMessage(
-                context = mockContext,
-                firstTimeInMilliSeconds = now!!,
-                secondTimeInMilliSeconds = it + now!!
-            )
+            getTimeDifferenceFromNowStringWith(it)
         }
 
 
@@ -86,11 +91,8 @@ class TimeDisplayerImplTest {
 
 
         val result = tenToFiftyNineInMilliSeconds.map {
-            TimeDisplayerImpl.getTimeDifferenceMessage(
-                context = mockContext,
-                firstTimeInMilliSeconds = now!!,
-                secondTimeInMilliSeconds = it + now!!
-            )
+            getTimeDifferenceFromNowStringWith(it)
+
         }
 
 
@@ -108,13 +110,10 @@ class TimeDisplayerImplTest {
         val secondsRange = (61..119).toList()
         val secondsRangeInMilliSeconds = secondsRange.map { it * 1000L }
 
-        //TODO refactor out into own function to make DRY
+
         val result = secondsRangeInMilliSeconds.map {
-            TimeDisplayerImpl.getTimeDifferenceMessage(
-                context = mockContext,
-                firstTimeInMilliSeconds = now!!,
-                secondTimeInMilliSeconds = it + now!!
-            )
+            getTimeDifferenceFromNowStringWith(it)
+
         }
 
 
@@ -136,11 +135,7 @@ class TimeDisplayerImplTest {
 
 
         val result = twoToFiftyNineMinutesInMilliSeconds.map {
-            TimeDisplayerImpl.getTimeDifferenceMessage(
-                context = mockContext,
-                firstTimeInMilliSeconds = it + now!!,
-                secondTimeInMilliSeconds = now!!
-            )
+            getTimeDifferenceFromNowStringWith(it)
         }
 
 
@@ -151,8 +146,6 @@ class TimeDisplayerImplTest {
 
     @Test
     fun ifTimeIsMoreThanFiftyNineMinutesButLessThanOneHundredAndTwentyMinutesReturnsOneHourAgoString() {
-        //TODO MAKE PASS
-
         val oneHourAgoString = "1 hour ago"
         every {
             mockContext.getString(R.string.one_hour_ago)
@@ -163,11 +156,7 @@ class TimeDisplayerImplTest {
 
 
         val result = timeRangeConvertedFromMinutesToMilliSeconds.map {
-            TimeDisplayerImpl.getTimeDifferenceMessage(
-                context = mockContext,
-                firstTimeInMilliSeconds = it + now!!,
-                secondTimeInMilliSeconds = now!!
-            )
+            getTimeDifferenceFromNowStringWith(it)
         }
 
 
@@ -176,4 +165,63 @@ class TimeDisplayerImplTest {
         }
     }
 
+    @Test
+    fun ifTimeIsMoreThanOneHundredAndNineteenMinutesButLessThanTwentyFourHoursReturnsAmountOfHoursWithHoursAgoString() {
+        val hoursAgoString = "hours ago"
+        every {
+            mockContext.getString(R.string.hours_ago)
+        } returns hoursAgoString
+        val twoToTwentyThree = (2..23).toList()
+        val timeRangeConvertedFromHoursToMilliSeconds = twoToTwentyThree.map { it * 60 * 60 * 1000L }
+
+
+        val result = timeRangeConvertedFromHoursToMilliSeconds.map {
+            getTimeDifferenceFromNowStringWith(it)
+        }
+
+
+        result.forEachIndexed { index, string ->
+            assertThat(string, `is`("${twoToTwentyThree[index]} $hoursAgoString"))
+        }
+    }
+
+    @Test
+    fun ifTimeIsEqualToOrMoreThanTwentyFourHoursButLessThanFortyEightHoursReturnsOneDayString() {
+        val oneDayString = "1 Day"
+        every {
+            mockContext.getString(R.string.one_day)
+        } returns oneDayString
+        val twentyFourToFortyEight = (24..47).toList()
+        val timeRangeConvertedFromHoursToMilliSeconds = twentyFourToFortyEight.map { it * 60 * 60 * 1000L }
+
+
+        val result = timeRangeConvertedFromHoursToMilliSeconds.map {
+            getTimeDifferenceFromNowStringWith(it)
+        }
+
+
+        result.forEach {
+            assertThat(it, `is`(oneDayString))
+        }
+    }
+
+    @Test
+    fun ifTimeIsEqualToOrMoreThan48HoursButLessThanOneWeekReturnsAmountOfDaysWithDaysString() {
+        val dayString = "days"
+        every {
+            mockContext.getString(R.string.days)
+        } returns dayString
+        val twoToSix = (2..6).toList()
+        val timeRangeConvertedFromDaysToMilliseconds = twoToSix.map { (it.toLong()).daysToMilliseconds() }
+
+
+        val result = timeRangeConvertedFromDaysToMilliseconds.map {
+            getTimeDifferenceFromNowStringWith(it)
+        }
+
+
+        result.forEachIndexed { index, string ->
+            assertThat(string, `is`("${twoToSix[index]} $dayString"))
+        }
+    }
 }

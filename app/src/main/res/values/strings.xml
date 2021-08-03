@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Whats In The Fridge</string>
     <string name="now">Now</string>
-    <string name="seconds_ago">seconds ago</string>
-    <string name="minute_ago">1 minute ago</string>
-    <string name="minutes_ago">minutes ago</string>
-    <string name="one_hour_ago">1 hour ago</string>
+    <string name="seconds_ago">seconds</string>
+    <string name="minute_ago">1 minute</string>
+    <string name="minutes_ago">minutes</string>
+    <string name="one_hour_ago">1 hour</string>
+    <string name="hours_ago">hours</string>
+    <string name="one_day">1 day</string>
+    <string name="days">days</string>
 </resources>
