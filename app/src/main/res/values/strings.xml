@@ -8,4 +8,6 @@
     <string name="hours_ago">hours</string>
     <string name="one_day">1 day</string>
     <string name="days">days</string>
+    <string name="all_food">All Foods</string>
+    <string name="add_food">Add Food</string>
 </resources>
