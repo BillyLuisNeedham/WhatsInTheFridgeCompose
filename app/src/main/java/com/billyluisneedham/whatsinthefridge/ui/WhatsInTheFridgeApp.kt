@@ -10,14 +10,15 @@ import androidx.navigation.compose.rememberNavController
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
 @Composable
-fun WhatsInTheFridgeApp() {
+fun WhatsInTheFridgeApp(onBack: () -> Unit) {
     WhatsInTheFridgeTheme {
         val navController = rememberNavController()
         Surface {
             Scaffold { innerPadding ->
                 WhatsInTheFridgeNavHost(
                     navController = navController,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
+                    onBack = onBack
                 )
             }
         }
@@ -27,5 +28,5 @@ fun WhatsInTheFridgeApp() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    WhatsInTheFridgeApp()
+    WhatsInTheFridgeApp(onBack = {})
 }

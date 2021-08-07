@@ -11,7 +11,8 @@ import com.billyluisneedham.whatsinthefridge.ui.foodlist.FoodListScreen
 @Composable
 fun WhatsInTheFridgeNavHost(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -22,7 +23,7 @@ fun WhatsInTheFridgeNavHost(
             FoodListScreen(navigateToAddFoods = { navController.navigate(Screens.AddFood.name) })
         }
         composable(route = Screens.AddFood.name) {
-            AddFoodScreen()
+            AddFoodScreen(onBack = onBack)
         }
     }
 }
