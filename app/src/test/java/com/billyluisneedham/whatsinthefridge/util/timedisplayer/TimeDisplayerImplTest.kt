@@ -224,4 +224,11 @@ class TimeDisplayerImplTest {
             assertThat(string, `is`("${twoToSix[index]} $dayString"))
         }
     }
+
+    @Test
+    fun getCurrentTimeInMilliSecondsReturnsTheCurrentTimeInMilliSeconds() {
+        val result = TimeDisplayerImpl.getCurrentTimeInMilliSeconds()
+
+        assertThat(result, `is`(System.currentTimeMillis()))
+    }
 }
