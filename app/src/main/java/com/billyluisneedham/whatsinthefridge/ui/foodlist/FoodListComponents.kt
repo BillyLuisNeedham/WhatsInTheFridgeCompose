@@ -1,9 +1,13 @@
 package com.billyluisneedham.whatsinthefridge.ui.foodlist
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.billyluisneedham.whatsinthefridge.R
 import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
-import com.billyluisneedham.whatsinthefridge.model.FoodInstance
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
 @Composable
@@ -52,6 +55,12 @@ fun FoodListContent(
             text = stringResource(id = R.string.all_food),
             modifier = Modifier.weight(1f)
         )
+        FoodCard(
+            food = FoodMocks.foodInstanceMock,
+            setQuantityOfFood = { quantity ->
+               Log.d("FoodListContent", "setQuantityOfFood called with $quantity")
+            }
+        )
         Button(
             onClick = navigateToAddFoods
         ) {
@@ -69,19 +78,3 @@ fun FoodListScreenPreview() {
     }
 }
 
-@Composable
-fun FoodCard(modifier: Modifier = Modifier, food: FoodInstance) {
-    Card {
-        Text(text = food.foodType.name)
-    }
-}
-
-@Preview
-@Composable
-fun FoodCardPreview() {
-    val foodInstance = FoodMocks.foodInstanceMock
-
-    WhatsInTheFridgeTheme {
-        FoodCard(food = foodInstance)
-    }
-}
