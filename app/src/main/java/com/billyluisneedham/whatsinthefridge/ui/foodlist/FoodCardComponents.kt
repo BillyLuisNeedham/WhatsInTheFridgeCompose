@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +21,8 @@ import com.billyluisneedham.whatsinthefridge.model.FoodInstance
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 import com.billyluisneedham.whatsinthefridge.util.timedisplayer.TimeDisplayer
 import com.billyluisneedham.whatsinthefridge.util.timedisplayer.TimeDisplayerImpl
+
+const val FOOD_CARD_TEST_TAG = "food_card_test_tag"
 
 @Composable
 fun FoodCard(
@@ -32,7 +35,9 @@ fun FoodCard(
     val paddingSmall = dimensionResource(id = R.dimen.padding_small)
 
     Card(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag(FOOD_CARD_TEST_TAG)
     ) {
         Surface(
             modifier = Modifier
@@ -41,7 +46,7 @@ fun FoodCard(
 
         ) {
             Column(
-                Modifier
+                modifier = Modifier
                     .clickable { isExpanded = !isExpanded }
                     .fillMaxWidth()
             ) {

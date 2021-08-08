@@ -25,7 +25,7 @@ class FoodListScreenTest {
 
 
         composeTestRule.onNodeWithText(mockFoodsList[0].foodType.name).assertExists()
-        composeTestRule.onNodeWithTag("foodCard").assertExists()
+        composeTestRule.onNodeWithTag(FOOD_CARD_TEST_TAG).assertExists()
 
     }
 }
