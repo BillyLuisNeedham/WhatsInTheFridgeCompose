@@ -41,13 +41,17 @@ class FoodCardTest {
             return "$timeInMilliSeconds"
         }
     }
+
     private var mockFoodQuantity = 0
+    private var mockDeleteFoodWithId = 0
     private lateinit var plusButtonContentDescription: String
     private lateinit var minusButtonContentDescription: String
+    private lateinit var deleteButtonContentDescription: String
 
     @Before
     fun setUp() {
         mockFoodQuantity = 0
+        mockDeleteFoodWithId = 0
         plusButtonContentDescription =
             InstrumentationRegistry.getInstrumentation().targetContext.getString(
                 R.string.plus_quantity_content_description
@@ -56,6 +60,7 @@ class FoodCardTest {
             InstrumentationRegistry.getInstrumentation().targetContext.getString(
                 R.string.minus_quantity_content_description
             )
+        deleteButtonContentDescription = InstrumentationRegistry.getInstrumentation().targetContext.getString(R.string.delete_food_content_description)
     }
 
     @Test
@@ -77,7 +82,8 @@ class FoodCardTest {
                 timeDisplayer = mockTimeDisplayer,
                 setQuantityOfFood = { quantity ->
                     mockFoodQuantity = quantity
-                }
+                },
+                // TODO WRITE DELETE FUNCTION
             )
         }
     }
@@ -140,6 +146,21 @@ class FoodCardTest {
 
 
         assertThat(mockFoodQuantity, `is`(mockFoodInstance.quantity - 1))
+    }
+
+    @Test
+    fun displaysDeleteIconThatRunsDeleteFoodFunctionPassedByParamsWithIdOfFoodInstanceIdAsParam() {
+        assertThat(mockDeleteFoodWithId, `is`(0))
+        setUpTest()
+
+
+        composeTestRule.onNodeWithContentDescription(
+            label =
+            deleteButtonContentDescription
+        ).performClick()
+
+
+        assertThat(mockDeleteFoodWithId, `is`(mockFoodInstance.foodInstanceId))
     }
 
 }
