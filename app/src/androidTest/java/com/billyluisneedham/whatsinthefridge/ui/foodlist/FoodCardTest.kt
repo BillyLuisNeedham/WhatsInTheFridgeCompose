@@ -20,6 +20,7 @@ class FoodCardTest {
     val composeTestRule = createComposeRule()
 
     private val mockFoodInstance = FoodMocks.foodInstanceMock
+
     private val mockTimeDisplayer = object : TimeDisplayer {
         override fun getCurrentTimeInMilliSeconds(): Long {
             return 0L
@@ -42,12 +43,19 @@ class FoodCardTest {
     }
     private var mockFoodQuantity = 0
     private lateinit var plusButtonContentDescription: String
+    private lateinit var minusButtonContentDescription: String
 
     @Before
     fun setUp() {
         mockFoodQuantity = 0
-        plusButtonContentDescription = InstrumentationRegistry.getInstrumentation().targetContext.getString(
-            R.string.plus_quantity_content_description)
+        plusButtonContentDescription =
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(
+                R.string.plus_quantity_content_description
+            )
+        minusButtonContentDescription =
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(
+                R.string.minus_quantity_content_description
+            )
     }
 
     @Test
@@ -92,7 +100,7 @@ class FoodCardTest {
             .assertDoesNotExist()
 
         getFoodNameNode()
-            .performGesture { click() }
+            .performClick()
 
         getFoodQuantityNode()
             .assertExists()
@@ -102,15 +110,36 @@ class FoodCardTest {
         composeTestRule.onNodeWithText(text = mockFoodInstance.quantity.toString())
 
     @Test
-    fun displayPlusIconThatRunsSetQuantityOfFoodFunctionPassedByParamsWithPlusOneOfTheCurrentQuantity() {
+    fun displaysPlusIconThatRunsSetQuantityOfFoodFunctionPassedByParamsWithPlusOneOfTheCurrentQuantity() {
         assertThat(mockFoodQuantity, `is`(0))
         setUpTest()
 
-        // TODO CLICK NAME
 
-        composeTestRule.onNodeWithContentDescription(label = plusButtonContentDescription).performGesture { click() }
+        getFoodNameNode()
+            .performClick()
+
+        composeTestRule.onNodeWithContentDescription(label = plusButtonContentDescription)
+            .performClick()
+
+
+        assertThat(mockFoodQuantity, `is`(mockFoodInstance.quantity + 1))
 
     }
 
+    @Test
+    fun displaysMinusIconThatRunsSetQuantityOfFoodFunctionPassedByParamsWithPlusOneOfTheCurrentQuantity() {
+        assertThat(mockFoodQuantity, `is`(0))
+        setUpTest()
+
+
+        getFoodNameNode()
+            .performClick()
+
+        composeTestRule.onNodeWithContentDescription(label = minusButtonContentDescription)
+            .performClick()
+
+
+        assertThat(mockFoodQuantity, `is`(mockFoodInstance.quantity - 1))
+    }
 
 }

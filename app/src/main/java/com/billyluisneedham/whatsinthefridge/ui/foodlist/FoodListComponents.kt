@@ -1,28 +1,30 @@
 package com.billyluisneedham.whatsinthefridge.ui.foodlist
 
-import android.util.Log
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.billyluisneedham.whatsinthefridge.R
 import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
+import com.billyluisneedham.whatsinthefridge.model.FoodInstance
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
 @Composable
 fun FoodListScreen(
     modifier: Modifier = Modifier,
-    navigateToAddFoods: () -> Unit
+    navigateToAddFoods: () -> Unit,
+    foodsList: List<FoodInstance>?
 ) {
+    val smallPadding = dimensionResource(id = R.dimen.padding_small)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -35,8 +37,9 @@ fun FoodListScreen(
         FoodListContent(
             modifier = modifier
                 .padding(innerPadding)
-                .padding(8.dp),
-            navigateToAddFoods = navigateToAddFoods
+                .padding(smallPadding),
+            navigateToAddFoods = navigateToAddFoods,
+            foodsList = foodsList
         )
     }
 
@@ -45,27 +48,14 @@ fun FoodListScreen(
 @Composable
 fun FoodListContent(
     modifier: Modifier = Modifier,
-    navigateToAddFoods: () -> Unit
+    navigateToAddFoods: () -> Unit,
+    foodsList: List<FoodInstance>?
 ) {
-    Column(
+    LazyColumn(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(id = R.string.all_food),
-            modifier = Modifier.weight(1f)
-        )
-        FoodCard(
-            food = FoodMocks.foodInstanceMock,
-            setQuantityOfFood = { quantity ->
-               Log.d("FoodListContent", "setQuantityOfFood called with $quantity")
-            }
-        )
-        Button(
-            onClick = navigateToAddFoods
-        ) {
-            Text(text = "Navigate to Add Foods")
-        }
+
 
     }
 }
@@ -74,7 +64,10 @@ fun FoodListContent(
 @Composable
 fun FoodListScreenPreview() {
     WhatsInTheFridgeTheme {
-        FoodListScreen(navigateToAddFoods = {})
+        FoodListScreen(
+            navigateToAddFoods = {},
+            foodsList = listOf(FoodMocks.foodInstanceMock)
+        )
     }
 }
 

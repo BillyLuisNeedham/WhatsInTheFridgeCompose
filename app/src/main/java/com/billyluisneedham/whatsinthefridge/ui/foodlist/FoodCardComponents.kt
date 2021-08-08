@@ -3,14 +3,18 @@ package com.billyluisneedham.whatsinthefridge.ui.foodlist
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.RemoveCircle
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.billyluisneedham.whatsinthefridge.R
 import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
 import com.billyluisneedham.whatsinthefridge.model.FoodInstance
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
@@ -25,6 +29,7 @@ fun FoodCard(
     setQuantityOfFood: (Int) -> Unit,
 ) {
     var isExpanded by remember { mutableStateOf(false) }
+    val paddingSmall = dimensionResource(id = R.dimen.padding_small)
 
     Card(
         modifier = modifier.fillMaxWidth()
@@ -33,7 +38,6 @@ fun FoodCard(
             modifier = Modifier
                 .animateContentSize()
                 .fillMaxWidth()
-                .padding(1.dp)
 
         ) {
             Column(
@@ -44,15 +48,16 @@ fun FoodCard(
                 FoodCardTopRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(paddingSmall),
                     food = food,
                     timeDisplayer = timeDisplayer
                 )
                 if (isExpanded) FoodCardBottomRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
-                    food = food
+                        .padding(paddingSmall),
+                    food = food,
+                    setQuantityOfFood = setQuantityOfFood
                 )
 
             }
@@ -81,9 +86,58 @@ private fun FoodCardTopRow(
 }
 
 @Composable
-private fun FoodCardBottomRow(modifier: Modifier = Modifier, food: FoodInstance) {
-    Row(modifier = modifier) {
+private fun FoodCardBottomRow(
+    modifier: Modifier = Modifier,
+    food: FoodInstance,
+    setQuantityOfFood: (Int) -> Unit
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(text = food.quantity.toString())
+        PlusMinusButtons(
+            onClickPlus = { setQuantityOfFood(food.quantity + 1) },
+            onClickMinus = { setQuantityOfFood(food.quantity - 1) }
+        )
+
+    }
+}
+
+@Composable
+fun PlusMinusButtons(
+    modifier: Modifier = Modifier,
+    onClickPlus: () -> Unit,
+    onClickMinus: () -> Unit
+) {
+    Row(modifier = modifier) {
+        IconButton(onClick = onClickPlus) {
+            Icon(
+                Icons.Filled.AddCircle,
+                contentDescription = stringResource(id = R.string.plus_quantity_content_description)
+            )
+        }
+        IconButton(onClick = onClickMinus) {
+            Icon(
+                Icons.Filled.RemoveCircle,
+                contentDescription = stringResource(id = R.string.minus_quantity_content_description)
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun FoodCardBottomRowPreview() {
+    WhatsInTheFridgeTheme {
+        Surface {
+            FoodCardBottomRow(
+                modifier = Modifier.fillMaxWidth(),
+                food = FoodMocks.foodInstanceMock,
+                setQuantityOfFood = { quantity -> }
+            )
+        }
     }
 }
 
