@@ -1,4 +1,4 @@
-package com.billyluisneedham.whatsinthefridge.data
+package com.billyluisneedham.whatsinthefridge.ui
 
 import java.lang.Exception
 
