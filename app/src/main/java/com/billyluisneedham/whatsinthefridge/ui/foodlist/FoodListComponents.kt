@@ -69,7 +69,6 @@ fun FoodListScreenPreview() {
     }
 }
 
-
 @Composable
 fun FoodCard(modifier: Modifier = Modifier, food: FoodInstance) {
     Card {
