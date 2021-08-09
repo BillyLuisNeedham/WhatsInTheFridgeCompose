@@ -1,7 +1,7 @@
-package com.billyluisneedham.whatsinthefridge.source
+package com.billyluisneedham.whatsinthefridge.data.source
 
-import com.billyluisneedham.whatsinthefridge.model.FoodType
-import com.billyluisneedham.whatsinthefridge.model.TagType
+import com.billyluisneedham.whatsinthefridge.domain.model.FoodType
+import com.billyluisneedham.whatsinthefridge.domain.model.TagType
 
 interface FoodTypeDataSource {
 

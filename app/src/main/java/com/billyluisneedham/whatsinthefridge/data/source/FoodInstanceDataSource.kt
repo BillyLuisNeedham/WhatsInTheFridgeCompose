@@ -1,6 +1,6 @@
-package com.billyluisneedham.whatsinthefridge.source
+package com.billyluisneedham.whatsinthefridge.data.source
 
-import com.billyluisneedham.whatsinthefridge.model.FoodInstance
+import com.billyluisneedham.whatsinthefridge.domain.model.FoodInstance
 
 interface FoodInstanceDataSource {
 

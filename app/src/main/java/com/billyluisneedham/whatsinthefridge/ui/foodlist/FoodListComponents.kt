@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.billyluisneedham.whatsinthefridge.R
 import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
-import com.billyluisneedham.whatsinthefridge.model.FoodInstance
+import com.billyluisneedham.whatsinthefridge.domain.model.FoodInstance
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
 @Composable
@@ -40,7 +40,7 @@ fun FoodListScreen(
                 .padding(innerPadding)
                 .padding(smallPadding),
             navigateToAddFoods = navigateToAddFoods,
-            foodsList = foodsList
+            foodsList = foodsList 
         )
     }
 

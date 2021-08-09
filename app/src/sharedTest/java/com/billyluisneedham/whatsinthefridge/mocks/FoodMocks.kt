@@ -1,7 +1,7 @@
 package com.billyluisneedham.whatsinthefridge.mocks
 
-import com.billyluisneedham.whatsinthefridge.model.FoodInstance
-import com.billyluisneedham.whatsinthefridge.model.FoodType
+import com.billyluisneedham.whatsinthefridge.domain.model.FoodInstance
+import com.billyluisneedham.whatsinthefridge.domain.model.FoodType
 import com.billyluisneedham.whatsinthefridge.util.daysToMilliseconds
 
 object FoodMocks {
