@@ -9,8 +9,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
-//TODO ADD VIEW MODEL
-//NEED TO FIGURE OUT HOW TO COME COLLECT A FLOW AND MAP TO UI
+//TODO ADD VIEW MODEL, NEED TO FIGURE OUT
+// HOW TO COME COLLECT A FLOW AND MAP TO UI
+// SEE https://developer.android.com/jetpack/compose/state
 @Composable
 fun WhatsInTheFridgeApp(onBack: () -> Unit) {
     WhatsInTheFridgeTheme {
