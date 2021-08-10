@@ -11,10 +11,26 @@
         <entry key="../../../../layout/compose-model-1628323575769.xml" value="0.33783783783783783" />
         <entry key="../../../../layout/compose-model-1628340738266.xml" value="0.2" />
         <entry key="../../../../layout/compose-model-1628341144835.xml" value="0.2064814814814815" />
+        <entry key="../../../../layout/compose-model-1628345429674.xml" value="0.17962962962962964" />
+        <entry key="../../../../layout/compose-model-1628345450094.xml" value="0.21296296296296297" />
+        <entry key="../../../../layout/compose-model-1628349794188.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1628425138548.xml" value="0.22" />
+        <entry key="../../../../layout/compose-model-1628428972577.xml" value="0.33699324324324326" />
+        <entry key="../../../../layout/compose-model-1628429025884.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1628430146694.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1628439904526.xml" value="0.3537037037037037" />
+        <entry key="../../../../layout/compose-model-1628440920682.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1628442146373.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1628443106054.xml" value="0.1638888888888889" />
+        <entry key="../../../../layout/compose-model-1628443236924.xml" value="0.2905405405405405" />
+        <entry key="../../../../layout/compose-model-1628526900395.xml" value="0.32559121621621623" />
+        <entry key="../../../../layout/compose-model-1628584610315.xml" value="0.26851851851851855" />
+        <entry key="../../../../layout/compose-model-1628584702278.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1628587337241.xml" value="0.25" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="14" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="14" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -13,6 +13,7 @@ fun WhatsInTheFridgeNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    mainViewModel: MainViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -20,7 +21,10 @@ fun WhatsInTheFridgeNavHost(
         modifier = modifier
     ) {
         composable(route = Screens.FoodList.name) {
-            FoodListScreen(navigateToAddFoods = { navController.navigate(Screens.AddFood.name) })
+            FoodListScreen(
+                navigateToAddFoods = { navController.navigate(Screens.AddFood.name) },
+                mainViewModel = mainViewModel
+                            )
         }
         composable(route = Screens.AddFood.name) {
             AddFoodScreen(onBack = onBack)

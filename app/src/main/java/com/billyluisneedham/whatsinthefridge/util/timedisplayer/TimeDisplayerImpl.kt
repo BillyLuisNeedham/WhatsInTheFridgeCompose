@@ -5,6 +5,10 @@ import com.billyluisneedham.whatsinthefridge.R
 import com.billyluisneedham.whatsinthefridge.util.*
 
 object TimeDisplayerImpl : TimeDisplayer {
+    override fun getCurrentTimeInMilliSeconds(): Long {
+        return System.currentTimeMillis()
+    }
+
     override fun getTimeDifferenceMessage(
         context: Context,
         firstTimeInMilliSeconds: Long,

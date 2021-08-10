@@ -1,4 +1,4 @@
-package com.billyluisneedham.whatsinthefridge.model
+package com.billyluisneedham.whatsinthefridge.domain.model
 
 data class TagType(
     val tagId: Long = 0,

@@ -11,4 +11,7 @@
     <string name="all_food">All Foods</string>
     <string name="add_food">Add Food</string>
     <string name="back_content_description">Navigate to back to previous screen</string>
+    <string name="plus_quantity_content_description">Increase the quantity of food by one unit</string>
+    <string name="minus_quantity_content_description">Removes one unit from the food quantity</string>
+    <string name="delete_food_content_description">Deletes the food</string>
 </resources>
