@@ -12,9 +12,13 @@ class FoodRepositoryImpl @Inject constructor() : FoodRepository {
 
     override fun getAllFoods(): Flow<Result<List<FoodInstance>>> {
 
+        val name = FoodMocks.foodInstanceMock.foodType.name
+        val foodType = FoodMocks.foodInstanceMock.foodType
+
         val mockLargeList =
             (0..100).map {
-                FoodMocks.foodInstanceMock
+                val newFoodType = foodType.copy(name = "$name $it")
+                FoodMocks.foodInstanceMock.copy(foodType = newFoodType)
             }
 
         //TODO UPDATE TO GET FROM DATA SOURCE
