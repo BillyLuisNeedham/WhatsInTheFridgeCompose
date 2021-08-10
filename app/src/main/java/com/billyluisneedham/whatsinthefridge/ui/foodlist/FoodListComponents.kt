@@ -72,12 +72,16 @@ private fun FoodList(
     modifier: Modifier = Modifier,
     foodsList: List<FoodInstance>
 ) {
+    val smallPadding = dimensionResource(id = R.dimen.padding_small)
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(items = foodsList) { food ->
-            FoodCard(food = food, setQuantityOfFood = {})
+            FoodCard(
+                modifier = Modifier.padding(vertical = smallPadding),
+                food = food,
+                setQuantityOfFood = {})
         }
     }
 }
