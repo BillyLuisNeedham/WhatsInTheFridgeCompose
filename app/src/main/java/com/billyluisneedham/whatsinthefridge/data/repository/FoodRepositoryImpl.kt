@@ -8,13 +8,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class FoodRepositoryImpl @Inject constructor(): FoodRepository {
+class FoodRepositoryImpl @Inject constructor() : FoodRepository {
 
     override fun getAllFoods(): Flow<Result<List<FoodInstance>>> {
 
+        val mockLargeList =
+            (0..100).map {
+                FoodMocks.foodInstanceMock
+            }
+
         //TODO UPDATE TO GET FROM DATA SOURCE
         return flow {
-            emit(Result.Success(listOf(FoodMocks.foodInstanceMock)))
+            emit(Result.Success(mockLargeList))
         }
     }
 }
