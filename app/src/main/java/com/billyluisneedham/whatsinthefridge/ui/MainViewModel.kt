@@ -2,6 +2,7 @@ package com.billyluisneedham.whatsinthefridge.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.billyluisneedham.whatsinthefridge.domain.Result
 import com.billyluisneedham.whatsinthefridge.domain.FoodRepository
 import com.billyluisneedham.whatsinthefridge.domain.model.FoodInstance
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             foodRepository.getAllFoods()
                 .collect {
-                    _foodList.value = Result.Success(it)
+                    _foodList.value = it
                 }
         }
     }

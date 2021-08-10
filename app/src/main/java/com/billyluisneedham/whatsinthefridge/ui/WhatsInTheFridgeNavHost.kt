@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.billyluisneedham.whatsinthefridge.mocks.FoodMocks
 import com.billyluisneedham.whatsinthefridge.ui.addfood.AddFoodScreen
 import com.billyluisneedham.whatsinthefridge.ui.foodlist.FoodListScreen
 
@@ -14,6 +13,7 @@ fun WhatsInTheFridgeNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    mainViewModel: MainViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -23,9 +23,8 @@ fun WhatsInTheFridgeNavHost(
         composable(route = Screens.FoodList.name) {
             FoodListScreen(
                 navigateToAddFoods = { navController.navigate(Screens.AddFood.name) },
-                // TODO REPLACE WITH PROPER DATA
-                foodsList = listOf(FoodMocks.foodInstanceMock)
-            )
+                mainViewModel = mainViewModel
+                            )
         }
         composable(route = Screens.AddFood.name) {
             AddFoodScreen(onBack = onBack)

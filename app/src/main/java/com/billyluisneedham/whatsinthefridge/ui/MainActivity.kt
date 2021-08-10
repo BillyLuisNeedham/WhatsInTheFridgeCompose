@@ -1,4 +1,4 @@
-package com.billyluisneedham.whatsinthefridge
+package com.billyluisneedham.whatsinthefridge.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,7 +16,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WhatsInTheFridgeApp(onBack = { onBackPressed() })
+            WhatsInTheFridgeApp(
+                onBack = { onBackPressed() },
+                mainViewModel = mainViewModel
+            )
         }
     }
 }

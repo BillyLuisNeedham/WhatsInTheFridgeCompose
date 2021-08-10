@@ -5,7 +5,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 
@@ -13,7 +12,10 @@ import com.billyluisneedham.whatsinthefridge.ui.theme.WhatsInTheFridgeTheme
 // HOW TO COME COLLECT A FLOW AND MAP TO UI
 // SEE https://developer.android.com/jetpack/compose/state
 @Composable
-fun WhatsInTheFridgeApp(onBack: () -> Unit) {
+fun WhatsInTheFridgeApp(
+    onBack: () -> Unit,
+    mainViewModel: MainViewModel
+) {
     WhatsInTheFridgeTheme {
         val navController = rememberNavController()
         Surface {
@@ -21,15 +23,11 @@ fun WhatsInTheFridgeApp(onBack: () -> Unit) {
                 WhatsInTheFridgeNavHost(
                     navController = navController,
                     modifier = Modifier.padding(innerPadding),
-                    onBack = onBack
+                    onBack = onBack,
+                    mainViewModel = mainViewModel
                 )
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    WhatsInTheFridgeApp(onBack = {})
-}
